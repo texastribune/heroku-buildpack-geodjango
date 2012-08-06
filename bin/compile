@@ -105,6 +105,15 @@ OUT=$(virtualenv --distribute --never-download  --prompt=venv . 2>&1)
   done
   OUT=$(virtualenv --distribute --never-download  --prompt=venv . )
 }
+
+# Rebuild if REBUILD_VIRTUALENV
+[ -n "$REBUILD_VIRTUALENV" ] && {
+  echo " !     Rebuilding virtualenv"
+  for dir in $VIRTUALENV_DIRS; do
+    rm -fr $dir &> /dev/null || true
+  done
+  OUT=$(virtualenv --distribute --never-download  --prompt=venv . )
+}
 echo "$OUT" | indent
 
 set -e

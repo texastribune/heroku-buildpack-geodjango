@@ -68,11 +68,6 @@ if [ ! -d $CACHE_DIR/gdal ]; then
   echo "GDAL installed" | indent
 fi
 
-# Reject a non-packaged Django app.
-if [ "$NAME" = "Python" ]; then
-  [ -f manage.py ] && [ -f settings.py ] && { echo " !     Django app must be in a package subdirectory"; exit 1; }
-fi
-
 # Warn a checked-in virtualenv.
 if [ -d "lib" ] || [ -d "bin" ]; then
   echo " !     You have a virtualenv checked in. You should ignore the appropriate paths in your repo. See http://devcenter.heroku.com/articles/gitignore for more info.";
